@@ -16,7 +16,7 @@ The attacker must satisfy several preconditions, disclosed here in full:
 - Fund the executor ATA with a dust balance to cover `reissue_amount` plus any nonzero relayer fee (the handler transfers gross_outflow = reissue_amount + ext_data.fee from the executor ATA to the vault; `reissue_amount > 0` is required; the PoC uses a dust reissue amount).
 So the exploit is not permissionless: it requires a whitelisted relayer who sets up their own JPerp slot/claimant and funds dust into the executor. For a non-custodial privacy pool this is still a critical failure: the relayer is explicitly a gas-abstraction role and must never be able to mint or move principal, and here an approved relayer can drain pooled funds. We flag these access conditions plainly; the severity call on the relayer model is the sponsor's, but the underlying missing-nullifier-burn defect is unconditional.
 
-## This is a defect, not intended behavior (the developers' own words)
+## Why this is a bug and not intended behavior
 
 The code and docs confirm the missing burn is an unenforced assumption, not a feature:
 - The program README states nullifiers exist for exactly this purpose: "PDA-based nullifiers, double-spend protection." Double-spending is what the system claims to prevent.
