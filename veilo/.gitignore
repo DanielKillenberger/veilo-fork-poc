@@ -1,0 +1,75 @@
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Rust / Cargo
+test-ledger
+target/
+# Cargo.lock is intentionally tracked for solana-verify deterministic builds
+
+# Anchor
+.DS_Store
+.anchor/
+.mpl-cache/
+dist/
+coverage/
+
+# Solana
+*.log
+*.json-ld
+# Local keypairs – be careful with this!
+id.json
+*.keypair.json
+target/deploy/*.json
+
+# Build artifacts
+*.so
+*.dll
+*.dylib
+*.rlib
+*.rmeta
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment / secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+keys/
+
+# Sensitive – deployment data and operational scripts
+deployments/
+scripts/
+
+# Tests / coverage
+coverage/
+.nyc_output/
+.jest/
+docs/
+docss/
+
+# ZK circuits (private)
+zk/
+circuits/
+fixtures/
+claimant.ts
+test-output.txt
+test-logs/
+test-accounts/
+prediction/
+tools/
+parked/

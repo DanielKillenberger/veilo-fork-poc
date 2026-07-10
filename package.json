@@ -1,0 +1,22 @@
+{
+  "name": "veilo-fork-poc",
+  "version": "1.0.0",
+  "description": "Tier-2 local-fork PoC for the Veilo jperp_reissue_notes nullifier-replay double-mint",
+  "private": true,
+  "scripts": {
+    "exploit": "tsx exploit.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.98.4",
+    "circomlibjs": "^0.1.7",
+    "snarkjs": "^0.7.5",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "@types/node": "^24.11.0"
+  }
+}

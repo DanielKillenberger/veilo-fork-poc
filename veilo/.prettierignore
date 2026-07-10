@@ -1,0 +1,11 @@
+
+.anchor
+.DS_Store
+target
+node_modules
+dist
+build
+test-ledger
+
+
+    // "test": "mocha -r ts-node/register -t 1000000 'tests/**/*.test.ts'",

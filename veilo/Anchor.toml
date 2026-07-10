@@ -1,0 +1,528 @@
+[toolchain]
+anchor_version = "0.32.1"
+solana_version = "2.3.0"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+privacy_pool = "HL8wNTnaVqNEkEetPa2eFgyiJVh9iBXeuD4k1pbdfVZa"
+
+[programs.localnet]
+privacy_pool = "DcGGPbV1wof1oPe3UbZKHgqFCYF69SShSnpHRsPGMa83"
+
+[programs.mainnet]
+privacy_pool = "GYy4kM6GHhpgLCUscuABbzkD2ZbJ2fneYryaZ6Ch7fFU"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/admin/.config/solana/id.json"
+
+[scripts]
+test = "npm run test:jperp"
+
+[test]
+startup_wait = 150000
+shutdown_wait = 2000
+upgradeable = false
+
+[[test.genesis]]
+address = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+program = "localnet-programs/spl_token_mainnet.so"
+upgradeable = false
+
+[test.validator]
+bind_address = "0.0.0.0"
+url = "https://mainnet.helius-rpc.com/?api-key="
+ledger = ".anchor/test-ledger"
+rpc_port = 8899
+
+[[test.validator.account]]
+address = "6KjSMWrMxsEi67f551oBtq9PzRGy2ifLS4UjBiPnbqH"
+filename = "test-accounts/byreal/6KjSMWrMxsEi67f551oBtq9PzRGy2ifLS4UjBiPnbqH.json"
+
+[[test.validator.account]]
+address = "FGptqdxjahafaCzpZ1T6EDtCzYMv7Dyn5MgBLyB3VUFW"
+filename = "test-accounts/pump-sell/FGptqdxjahafaCzpZ1T6EDtCzYMv7Dyn5MgBLyB3VUFW.json"
+
+[[test.validator.account]]
+address = "6rVkF4HSgy1jrnC3HogfRgPHrq4CtLg5f11URpsC4i9D"
+filename = "test-accounts/pump-sell/6rVkF4HSgy1jrnC3HogfRgPHrq4CtLg5f11URpsC4i9D.json"
+
+[[test.validator.account]]
+address = "3BpXnfJaUTiwXnJNe7Ej1rcbzqTTQUvLShZaWazebsVR"
+filename = "test-accounts/pump-sell/3BpXnfJaUTiwXnJNe7Ej1rcbzqTTQUvLShZaWazebsVR.json"
+
+[[test.validator.account]]
+address = "CGEWR6pxwgQvYKeX4pZDqpZtWYPvyTjiAsw86SNzJtGy"
+filename = "test-accounts/pump-sell/CGEWR6pxwgQvYKeX4pZDqpZtWYPvyTjiAsw86SNzJtGy.json"
+
+[[test.validator.account]]
+address = "HjQjngTDqoHE6aaGhUqfz9aQ7WZcBRjy5xB8PScLSr8i"
+filename = "test-accounts/pump-sell/HjQjngTDqoHE6aaGhUqfz9aQ7WZcBRjy5xB8PScLSr8i.json"
+
+[[test.validator.account]]
+address = "Bvtgim23rfocUzxVX9j9QFxTbBnH8JZxnaGLCEkXvjKS"
+filename = "test-accounts/pump-sell/Bvtgim23rfocUzxVX9j9QFxTbBnH8JZxnaGLCEkXvjKS.json"
+
+[[test.validator.account]]
+address = "5YxQFdt3Tr9zJLvkFccqXVUwhdTWJQc1fFg2YPbxvxeD"
+filename = "test-accounts/pump-sell/5YxQFdt3Tr9zJLvkFccqXVUwhdTWJQc1fFg2YPbxvxeD.json"
+
+[[test.validator.account]]
+address = "X5QPJcpph4mBAJDzc4hRziFftSbcygV59kRb2Fu6Je1"
+filename = "test-accounts/pump-sell/X5QPJcpph4mBAJDzc4hRziFftSbcygV59kRb2Fu6Je1.json"
+
+[[test.validator.account]]
+address = "GAFuhgcd328SkkBYHpfadzmef9hTGAFRCi9QoCnsZQug"
+filename = "test-accounts/pump-sell/GAFuhgcd328SkkBYHpfadzmef9hTGAFRCi9QoCnsZQug.json"
+
+[[test.validator.account]]
+address = "qkYdTGRPHbWTWuBMz45bCiU6a23axRqf6sBHm9295WY"
+filename = "test-accounts/pump-sell/qkYdTGRPHbWTWuBMz45bCiU6a23axRqf6sBHm9295WY.json"
+
+[[test.validator.account]]
+address = "7GFUN3bWzJMKMRZ34JLsvcqdssDbXnp589SiE33KVwcC"
+filename = "test-accounts/pump-sell/7GFUN3bWzJMKMRZ34JLsvcqdssDbXnp589SiE33KVwcC.json"
+
+[[test.validator.account]]
+address = "CA7v8gHfbquYXyDnDx6QxWW8hmL1H7X6Y2RYDrGLnuck"
+filename = "test-accounts/pump-sell/CA7v8gHfbquYXyDnDx6QxWW8hmL1H7X6Y2RYDrGLnuck.json"
+
+[[test.validator.account]]
+address = "CASRL2zkwDnppxEFQ4LgdwgR9pdz5Q8R8nEMKVZ9QoLp"
+filename = "test-accounts/pump-sell/CASRL2zkwDnppxEFQ4LgdwgR9pdz5Q8R8nEMKVZ9QoLp.json"
+
+[[test.validator.account]]
+address = "9M4giFFMxmFGXtc3feFzRai56WbBqehoSeRE5GK7gf7"
+filename = "test-accounts/pump-sell/9M4giFFMxmFGXtc3feFzRai56WbBqehoSeRE5GK7gf7.json"
+
+[[test.validator.account]]
+address = "EHAAiTxcdDwQ3U4bU6YcMsQGaekdzLS3B5SmYo46kJtL"
+filename = "test-accounts/pump-sell/EHAAiTxcdDwQ3U4bU6YcMsQGaekdzLS3B5SmYo46kJtL.json"
+
+[[test.validator.account]]
+address = "5eHhjP8JaYkz83CWwvGU2uMUXefd3AazWGx4gpcuEEYD"
+filename = "test-accounts/pump-sell/5eHhjP8JaYkz83CWwvGU2uMUXefd3AazWGx4gpcuEEYD.json"
+
+[[test.validator.account]]
+address = "5yuefgbJJpmFNK2iiYbLSpv1aZXq7F9AUKkZKErTYCvs"
+filename = "test-accounts/meteora/5yuefgbJJpmFNK2iiYbLSpv1aZXq7F9AUKkZKErTYCvs.json"
+
+[[test.validator.account]]
+address = "3ESUFCnRNgZ7Mn2mPPUMmXYaKU8jpnV9VtA17M7t2mHQ"
+filename = "test-accounts/meteora/3ESUFCnRNgZ7Mn2mPPUMmXYaKU8jpnV9VtA17M7t2mHQ.json"
+
+[[test.validator.account]]
+address = "FERjPVNEa7Udq8CEv68h6tPL46Tq7ieE49HrE2wea3XT"
+filename = "test-accounts/meteora/FERjPVNEa7Udq8CEv68h6tPL46Tq7ieE49HrE2wea3XT.json"
+
+[[test.validator.account]]
+address = "C2QoQ111jGHEy5918XkNXQro7gGwC9PKLXd1LqBiYNwA"
+filename = "test-accounts/meteora/C2QoQ111jGHEy5918XkNXQro7gGwC9PKLXd1LqBiYNwA.json"
+
+[[test.validator.account]]
+address = "HZeLxbZ9uHtSpwZC3LBr4Nubd14iHwz7bRSghRZf5VCG"
+filename = "test-accounts/meteora/HZeLxbZ9uHtSpwZC3LBr4Nubd14iHwz7bRSghRZf5VCG.json"
+
+[[test.validator.account]]
+address = "3RpEekjLE5cdcG15YcXJUpxSepemvq2FpmMcgo342BwC"
+filename = "test-accounts/meteora/3RpEekjLE5cdcG15YcXJUpxSepemvq2FpmMcgo342BwC.json"
+
+[[test.validator.account]]
+address = "FZN7QZ8ZUUAxMPfxYEYkH3cXUASzH8EqA6B4tyCL8f1j"
+filename = "test-accounts/meteora/FZN7QZ8ZUUAxMPfxYEYkH3cXUASzH8EqA6B4tyCL8f1j.json"
+
+[[test.validator.account]]
+address = "CNc2A5yjKUa9Rp3CVYXF9By1qvRHXMncK9S254MS9JeV"
+filename = "test-accounts/meteora/CNc2A5yjKUa9Rp3CVYXF9By1qvRHXMncK9S254MS9JeV.json"
+
+[[test.validator.account]]
+address = "7LHUMZd12RuanSXhXjQWPSXS6QEVQimgwxde6xYTJuA7"
+filename = "test-accounts/meteora/7LHUMZd12RuanSXhXjQWPSXS6QEVQimgwxde6xYTJuA7.json"
+
+[[test.validator.account]]
+address = "5YMJwb6z56NJh4QxgXULJsoUZLb4mFHwpUMfNxJ5KhaZ"
+filename = "test-accounts/meteora/5YMJwb6z56NJh4QxgXULJsoUZLb4mFHwpUMfNxJ5KhaZ.json"
+
+[[test.validator.account]]
+address = "3YWmQzX9gm6EWLx72f7EUVWiVsWm1y8JzfJvTdRJe8v6"
+filename = "test-accounts/meteora/3YWmQzX9gm6EWLx72f7EUVWiVsWm1y8JzfJvTdRJe8v6.json"
+
+[[test.validator.account]]
+address = "3EW2tbXHz78Vd13QgyMDozJYEScg5ZELtwEA4sE3Qd7K"
+filename = "test-accounts/meteora/3EW2tbXHz78Vd13QgyMDozJYEScg5ZELtwEA4sE3Qd7K.json"
+
+[[test.validator.account]]
+address = "BWXT6RUhit9FfJQM3pBmqeFLPYmuxgmyhMGC5sGr8RbA"
+filename = "test-accounts/meteora/BWXT6RUhit9FfJQM3pBmqeFLPYmuxgmyhMGC5sGr8RbA.json"
+
+[[test.validator.account]]
+address = "8Pnv6wtWLc2ChUQpCvUUqHpJTJCbAdaufDfwzdA7bXNj"
+filename = "test-accounts/meteora/8Pnv6wtWLc2ChUQpCvUUqHpJTJCbAdaufDfwzdA7bXNj.json"
+
+[[test.validator.account]]
+address = "HpzHEUDshQwH3HKQewqG8YwKowdGyr2Xo7H9ctePi84M"
+filename = "test-accounts/meteora/HpzHEUDshQwH3HKQewqG8YwKowdGyr2Xo7H9ctePi84M.json"
+
+[[test.validator.account]]
+address = "7kLSQaeQPehNHBdxLzb5WRuU14UPrRT34pK5fiyojaAU"
+filename = "test-accounts/meteora/7kLSQaeQPehNHBdxLzb5WRuU14UPrRT34pK5fiyojaAU.json"
+
+[[test.validator.account]]
+address = "3AnCQ3763fJpJQbUdcadCugoHaPicYw9Xx5dLWnC2kom"
+filename = "test-accounts/meteora/3AnCQ3763fJpJQbUdcadCugoHaPicYw9Xx5dLWnC2kom.json"
+
+[[test.validator.account]]
+address = "6SWtsTzXrurtVWZdEHvnQdE9oM8tTtyg8rfEo3b4nM93"
+filename = "test-accounts/meteora/6SWtsTzXrurtVWZdEHvnQdE9oM8tTtyg8rfEo3b4nM93.json"
+
+[[test.validator.account]]
+address = "5C4MJjwGoB9CQ4d5RfgC43PN9TsMTMx17RVNKNiFeGgh"
+filename = "test-accounts/meteora/5C4MJjwGoB9CQ4d5RfgC43PN9TsMTMx17RVNKNiFeGgh.json"
+
+[[test.validator.account]]
+address = "BTdT3HX4s1dtLoasuTqxNhq6jt2zd8WnVNJLhPgcfW15"
+filename = "test-accounts/meteora/BTdT3HX4s1dtLoasuTqxNhq6jt2zd8WnVNJLhPgcfW15.json"
+
+[[test.validator.account]]
+address = "6CdGrPhb6vDxozjKqgj2p4cGc92wXxFyvqXPkRzocGuZ"
+filename = "test-accounts/meteora/6CdGrPhb6vDxozjKqgj2p4cGc92wXxFyvqXPkRzocGuZ.json"
+
+[[test.validator.account]]
+address = "CSNoiTbRz8XsBYXtdYVg4NTeUX729pmzAofUQHAHZu4r"
+filename = "test-accounts/meteora/CSNoiTbRz8XsBYXtdYVg4NTeUX729pmzAofUQHAHZu4r.json"
+
+[[test.validator.account]]
+address = "FWsW1xNtWscwNmKv6wVsU1iTzRN6wmmk3MjxRP5tT7hz"
+filename = "test-accounts/meteora/FWsW1xNtWscwNmKv6wVsU1iTzRN6wmmk3MjxRP5tT7hz.json"
+
+[[test.validator.account]]
+address = "7xQYoUjUJF1Kg6WVczoTAkaNhn5syQYcbvjmFrhjWpx"
+filename = "test-accounts/meteora/7xQYoUjUJF1Kg6WVczoTAkaNhn5syQYcbvjmFrhjWpx.json"
+
+[[test.validator.account]]
+address = "F3DAAusn8mob9swWaX4ehaRrhi2Q3XJScKkuUpXdvn2i"
+filename = "test-accounts/raydium/F3DAAusn8mob9swWaX4ehaRrhi2Q3XJScKkuUpXdvn2i.json"
+
+[[test.validator.account]]
+address = "3h2e43PunVA5K34vwKCLHWhZF4aZpyaC9RmxvshGAQpL"
+filename = "test-accounts/raydium/3h2e43PunVA5K34vwKCLHWhZF4aZpyaC9RmxvshGAQpL.json"
+
+[[test.validator.account]]
+address = "GzxEr7YV5Yxgh6KDQiY2h2LC1rHB1KroWXGNYWCswLrk"
+filename = "test-accounts/raydium/GzxEr7YV5Yxgh6KDQiY2h2LC1rHB1KroWXGNYWCswLrk.json"
+
+[[test.validator.account]]
+address = "EfR9iLv5vVdhXnwAwRiMpXPvAYxo3SfMeo7bsVHDPrRJ"
+filename = "test-accounts/raydium/EfR9iLv5vVdhXnwAwRiMpXPvAYxo3SfMeo7bsVHDPrRJ.json"
+
+[[test.validator.account]]
+address = "5vxvPuMFS5LfZBRP4SmRcfcZ6J8o9UTA8pCkfx5KuGvZ"
+filename = "test-accounts/raydium/5vxvPuMFS5LfZBRP4SmRcfcZ6J8o9UTA8pCkfx5KuGvZ.json"
+
+[[test.validator.account]]
+address = "FYq2BWQ1V5P1WFBqr3qB2Kb5yHVvSv7upzKodgQE5zXh"
+filename = "test-accounts/jperp-sol-doves-oracle.json"
+
+[[test.validator.account]]
+address = "G1fQz1iUqk7GNG5QRVnxD2vb1wkN7ne8v2Vkqp4DTriL"
+filename = "test-accounts/jperp-wallet-usdc.json"
+
+[[test.validator.account]]
+address = "7Jj1vvJSSfE7C2jHbuRysLeBR9Y1MYXtm9zSHpHaN4MK"
+filename = "test-accounts/jperp-position.json"
+
+[[test.validator.account]]
+address = "ECLth6aoA99qCbSXSgf6xs4LK9cvAykhKDSH8vr5EXsz"
+filename = "test-accounts/jperp-position-long.json"
+
+[[test.validator.account]]
+address = "DcYRAGwptmEjVHeeCuk6VAcrgiG7i8HxwcVVomB9BKNM"
+filename = "test-accounts/jperp-position-sol.json"
+
+[[test.validator.account]]
+address = "AFZnHPzy4mvVCffrVwhewHbFc93uTHvDSFrVH7GtfXF1"
+filename = "test-accounts/jperp-eth-doves-oracle.json"
+
+[[test.validator.account]]
+address = "hUqAT1KQ7eW1i6Csp9CXYtpPfSAvi835V7wKi5fRfmC"
+filename = "test-accounts/jperp-btc-doves-oracle.json"
+
+[[test.validator.account]]
+address = "GVMuE6QNVjvkuLc8JeSWpEfBUVm4be5ABRbKMv1iSWwh"
+filename = "test-accounts/jperp-position-eth-short.json"
+
+[[test.validator.account]]
+address = "Bt6hawacYP65RxfQw51vChtC26VXMk2RTXaLNkAvcCwA"
+filename = "test-accounts/jperp-position-eth-long.json"
+
+[[test.validator.account]]
+address = "9BPH9mPBZBkQ6f42pBo7fvHN7zW5g16vHjbV2ECNZwfk"
+filename = "test-accounts/jperp-eth-vault-ata.json"
+
+[[test.validator.account]]
+address = "BBwHKGkDptqD51xCr5Yw8JvWABtHQWBaTb9t7ypRbCak"
+filename = "test-accounts/jperp-wallet-eth-ata.json"
+
+[[test.validator.clone]]
+address = "So11111111111111111111111111111111111111112"
+
+[[test.validator.clone]]
+address = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+
+[[test.validator.clone]]
+address = "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4"
+
+[[test.validator.clone]]
+address = "D8cy77BBepLMngZx6ZukaTff5hCt1HrWyKk3Hnd9oitf"
+
+[[test.validator.clone]]
+address = "GExbmeCi1mTB8YbDud2USBnkSRFsVRH53Ujs6VNmpump"
+
+[[test.validator.clone]]
+address = "EmcxFTNVDqyLHp11NvwvLZ4D7LKGbG9i7B8RF7dwpump"
+
+[[test.validator.clone]]
+address = "Xs3oZwbHvqis4NYcf4YKWmEia2eC84wSiVrcYcTqpH8"
+
+[[test.validator.clone]]
+address = "REALQqNEomY6cQGZJUGwywTBD2UmDT32rZcNnfxQ5N2"
+
+[[test.validator.clone]]
+address = "Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB"
+
+[[test.validator.clone]]
+address = "24Uqj9JCLxUeoC3hGfh5W3s9FM9uCHDS2SG3LYwBpyTi"
+
+[[test.validator.clone]]
+address = "G37RVgCrjfeUttKfPB6ivQVAhwMQNUA1xPojfjomkqPu"
+
+[[test.validator.clone]]
+address = "LVcDubF4BFsEw8qmxupmw74bbZfiya99kor5c3Hh24r"
+
+[[test.validator.clone]]
+address = "HC6tghmJ9WNHi75PN7WsJip7UEimouaD4JezzajSU8nd"
+
+[[test.validator.clone]]
+address = "2UbS3CBQpxYxq9FnCoC9RMu5MHZ4c4BNfF9ymBbMsVfy"
+
+[[test.validator.clone]]
+address = "F5RXMszfuqrfBBVdZ15UYuTj2dWkTP8mbagLTXffBPed"
+
+[[test.validator.clone]]
+address = "6GYNR3NikNtTw53VTSqrwPo8zyPP7MqnhNb6zEGAxTor"
+
+[[test.validator.clone]]
+address = "5d45QMCiYZmSDZNecwu9x6BktjQj4nr3ibL123s9QAdu"
+
+[[test.validator.clone]]
+address = "Ezo6sY7eAYTMhs3kUP3cRUsAF6haxnfW1CeSvpXeb3u5"
+
+[[test.validator.clone]]
+address = "Akoiq29JTXxCh6SDaeVwpzfWqzNrzF5CJLHmx7TEC1Rc"
+
+[[test.validator.clone]]
+address = "5LYS6fvSi2MjenHbZXZu2DAd3mUPuwfn1yoghgXevsxt"
+
+[[test.validator.clone]]
+address = "6GYNR3NikNtTw53VTSqrwPo8zyPP7MqnhNb6zEGAxTor"
+
+[[test.validator.clone]]
+address = "5d45QMCiYZmSDZNecwu9x6BktjQj4nr3ibL123s9QAdu"
+
+[[test.validator.clone]]
+address = "Ezo6sY7eAYTMhs3kUP3cRUsAF6haxnfW1CeSvpXeb3u5"
+
+[[test.validator.clone]]
+address = "whirLbMiicVdio4qvUfM5KAg6Ct8VwpYzGff3uctyCc"
+
+[[test.validator.clone]]
+address = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
+
+[[test.validator.clone]]
+address = "HNXTRVNoi63PZvBnVmZCUBouyF76zQbXHYtUpZcxKinc"
+
+[[test.validator.clone]]
+address = "8BtWJRsn7ng6ekzkQE5mwceTZBfrcUTpUVviHUSFgWrz"
+
+[[test.validator.clone]]
+address = "7kx8gLMJmDzTBBvH1wrnuQygoVu2BDAQVHrthDLfbknK"
+
+[[test.validator.clone]]
+address = "8kZFZ6y96ATN7MuRz5fH5X1spAutJ3yzidQstWabCTtb"
+
+[[test.validator.clone]]
+address = "7px1QDfBExCWLRkaZ5kbLfNnUfQPfgYU22rp1fdSWQNy"
+
+[[test.validator.clone]]
+address = "BaFzTVCipUdsrrKuF5Vv362gujFedMgzvXx6LfYGoWhR"
+
+[[test.validator.clone]]
+address = "BAo9hJuLQgZq8JuSYkfe43gLw7XTTZYHrXU3JpxBkyNK"
+
+[[test.validator.clone]]
+address = "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA"
+
+[[test.validator.clone]]
+address = "pfeeUxB6jkeY1Hxd7CsFCAjcbHA9rWtchMGdZ6VojVZ"
+
+[[test.validator.clone]]
+address = "GN9whJWrkgU8jBRpM5oa4iwSzYw1LivjB397DSyvbVG"
+
+[[test.validator.clone]]
+address = "ADyA8hdefvWN2dbGGWFotbzWxrAvLW83WG6QCVXvJKqw"
+
+[[test.validator.clone]]
+address = "HkrXuFeGx1JkiTvwkuniZYR75tKxfVpLENHh2H5tEE9J"
+
+[[test.validator.clone]]
+address = "DLxtrZH5Z1hVpM1jSRnuYDsLYK9uZHd4N9DeUBtuEaM"
+
+[[test.validator.clone]]
+address = "G5UZAVbAf46s7cKWoyKu8kYTip9DGTpbLZ2qa9Aq69dP"
+
+[[test.validator.clone]]
+address = "BMqY71czEnfwxTp7zTc3Wdkushpn8VfSJ6NGZX11djM1"
+
+[[test.validator.clone]]
+address = "GS4CU59F31iL7aR2Q8zVS8DRrcRnXX1yjQ66TqNVQnaR"
+
+[[test.validator.clone]]
+address = "9FLiSF8v9KkokAZB99fS1BxsrmQNiMAycWYYVxK4JDnt"
+
+[[test.validator.clone]]
+address = "C2aFPdENg4A2HQsmrd5rTw5TaYBX5Ku887cWjbFKtZpw"
+
+[[test.validator.clone]]
+address = "5PHirr8joyTMp9JMm6nW7hNDVyEYdkzDqazxPD7RaTjx"
+
+[[test.validator.clone]]
+address = "5cjcW9wExnJJiqgLjq7DEG75Pm6JBgE1hNv4B2vHXUW6"
+
+[[test.validator.clone]]
+address = "4EcDKGwpgYLVnMmjJCDrUN2DVLQKSpSKyMhqU1GbuMsv"
+
+[[test.validator.clone]]
+address = "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
+
+[[test.validator.clone]]
+address = "4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf"
+
+[[test.validator.clone]]
+address = "3DgnRUmGcjJ21ZfeW7JufafjPwYT4SPfx1n88QgsigtG"
+
+[[test.validator.clone]]
+address = "8bCzLNfqWUkBqt4sosJyhsAPDYu68QH713VEeNRYSTsg"
+
+[[test.validator.clone]]
+address = "AHNCD9xGQrKnXQWinzaCYqDkYkq2oLJR4KdEBwvMPG4Z"
+
+[[test.validator.clone]]
+address = "GesfTA3X2arioaHp8bbKdjG9vJtskViWACZoYvxp4twS"
+
+[[test.validator.clone]]
+address = "Ce6TQqeHC9p8KetsN6JsjHK7UTZk7nasjjnr7XxXp9F1"
+
+[[test.validator.clone]]
+address = "8Wf5TiAheLUqBrKXeYg2JtAFFMWtKdG2BSFgqUcPVwTt"
+
+[[test.validator.clone]]
+address = "A7hAgCzFw14fejgCp387JUJRMNyz4j89JKnhtKU8piqW"
+
+[[test.validator.clone]]
+address = "Hq2wp8uJ9jCPsYgNHex8RtqdvMPfVGoYwjvF1ATiwn2Y"
+
+[[test.validator.clone]]
+address = "5cjcW9wExnJJiqgLjq7DEG75Pm6JBgE1hNv4B2vHXUW6"
+
+[[test.validator.clone]]
+address = "8sNeir4QsLsJdYpc9RZacohhK1Y5FLU3nC5LXgYB4aa6"
+
+[[test.validator.clone]]
+address = "21L1QB6DJ9HBvePgwN6jFuK3UT9mq2SgTq1oJ7D6cNiV"
+
+[[test.validator.clone]]
+address = "GYH1Gae1wJytMSvMvw8JVcv7nuAbxi8i9erNVbERnzXd"
+
+[[test.validator.clone]]
+address = "62qc2CNXwrYqQScmEdiZFFAnJR262PxWEuNQtxfafNgV"
+
+[[test.validator.clone]]
+address = "94qWNrtmfn42h3ZjUZwWvK1MEo9uVmmrBPd2hpNjYDjb"
+
+[[test.validator.clone]]
+address = "GXPFM2caqTtQYC2cJ5yJRi9VDkpsYZXzYdwYpGnLmtDL"
+
+[[test.validator.clone]]
+address = "AktftA98kSWAxn6kVSoqBXBELUArjKu2H9WmKB48ULFY"
+
+[[test.validator.clone]]
+address = "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK"
+
+[[test.validator.clone]]
+address = "CARDSccUMFKoPRZxt5vt3ksUbxEFEcnZ3H2pd3dKxYjp"
+
+[[test.validator.clone]]
+address = "BbsV2EVGbZRxcsautaCboD1X9k15cFBNVXm6S6ANve9N"
+
+[[test.validator.clone]]
+address = "h1mqtYoqprtckac9cUo1Vh83mA1NuzTDVECREVRwYSq"
+
+[[test.validator.clone]]
+address = "HaDKJQJEuqYdkZ5u8TbGLstbeg7eSxso4iXfxWxu4b5H"
+
+[[test.validator.clone]]
+address = "A1BBtTYJd4i3xU8D6Tc2FzU6ZN4oXZWXKZnCxwbHXr8x"
+
+[[test.validator.clone]]
+address = "5UUdSTWM1gv4emMEfARYYS7DTb3RPm9P5WUoYrcBimJP"
+
+[[test.validator.clone]]
+address = "J4WgZDDVzmhN71LNMZ2XQMdUxTwRoxbPifT1QNfiwP1k"
+
+[[test.validator.clone]]
+address = "6wsMx5nY662LPefsunWcQaADPVfgU7nCgPgxgdfj6HUC"
+
+[[test.validator.clone]]
+address = "7YkyCeVEgneym3siQiMY4LotrYQGxEm622Ufb6tNDHjU"
+
+[[test.validator.clone]]
+address = "A93dhWDGLSvFGUP2WHecsbK8cxua1jGm8cmAe5nTCd3e"
+
+[[test.validator.clone]]
+address = "DYP18qVXnFWBUkrfcnPGrbtDoj4gE5nBU8uatPTYXQbs"
+
+[[test.validator.clone]]
+address = "PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu"
+
+[[test.validator.clone]]
+address = "5BUwFW4nRbftYTDMbgxykoFWqWHPzahFSNAaaaJtVKsq"
+
+[[test.validator.clone]]
+address = "7xS2gz2bTp3fwCC7knJvUWTEU9Tycczu6VhJYKgi1wdz"
+
+[[test.validator.clone]]
+address = "G18jKKXQwBbrHeiK3C9MRXhkHsLHf7XgCSisykV46EZa"
+
+[[test.validator.clone]]
+address = "H4ND9aYttUVLFmNypZqLjZ52FYiGvdEB45GmwNoKEjTj"
+
+[[test.validator.clone]]
+address = "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs"
+
+[[test.validator.clone]]
+address = "AQCGyheWPLeo6Qp9WpYS9m3Qj479t7R636N9ey1rEjEn"
+
+[[test.validator.clone]]
+address = "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"
+
+[[test.validator.clone]]
+address = "5Pv3gM9JrFFH883SWAhvJC9RPYmo8UNxuFtv5bMMALkm"
+
+[[test.validator.clone]]
+address = "6TVfaAU1DuJCfbqyXypNtz5Uzyo2tH2UF5smnNUyv2h4"
