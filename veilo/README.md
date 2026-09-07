@@ -1,3 +1,5 @@
+> **Historical source snapshot bundled with the July 10 PoC.** This is not current upstream. General build guidance below comes from the bundled source; proving artifacts and generated build files are absent. See the [root README](../README.md) before reproduction.
+
 # Veilo
 
 A zero-knowledge privacy protocol on Solana.
@@ -47,6 +49,6 @@ Veilo breaks the on-chain link between deposits and withdrawals. It does not pro
 
 ### License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see LICENSE (not included in this historical snapshot).
 
 > This software is provided as-is. Use at your own risk. Always audit before using in production.

@@ -1,105 +1,54 @@
-# Veilo tier-2 local-fork PoC: jperp_reissue_notes nullifier-replay double-mint
+# Veilo nullifier-replay PoC — historical disclosure
 
-This proof-of-concept executes the actual on-chain double-mint in Veilo's privacy_pool program on a local Solana validator.
-It upgrades the tier-1 PoC (which proved the transaction circuit accepts nonzero real inputs offline) to a full end-to-end on-chain exploit against the real, unmodified program.
+This repository preserves my July 10, 2026 submission to the [Veilo Superteam bounty](https://superteam.fun/earn/listing/veilo-bounty), with publication context added on September 8, 2026.
 
-Localnet only. This never touches live mainnet and never moves real funds, per the bounty rules ("local fork testing using mainnet state").
+The report describes how a whitelisted relayer controlling a valid claimant slot could reuse already-spent notes through `jperp_reissue_notes`, mint unbacked private notes, and withdraw pooled tokens. Upstream subsequently added the exact spent-status checks and nullifier consumption described in the report.
 
-## The bug
+**My submission was received at 21:00 Zurich on July 10. The matching upstream fix has a commit timestamp 3 hours 22 minutes later.** The receipt and repository metadata support this chronology. They do not establish that my report caused the fix, that I was the first reporter, or when the fix was deployed.
 
-`transact` (the normal spend path) burns every input nullifier two ways: the nullifier-marker PDA is created with `init` (a second use of the same nullifier aborts at account resolution), and the handler additionally checks `require!(!marker.is_spent)` then sets `is_spent = true`.
+## Timeline and evidence
 
-`jperp_reissue_notes` feeds user-supplied input nullifiers into the SAME Groth16 transaction proof (same `TRANSACTION_VK`, same 2-in-2-out UTXO circuit) but never checks `is_spent` and never calls `mark_nullifier_spent`.
-Its nullifier-marker accounts are declared `init_if_needed` on the exact same global namespace `[b"nullifier_v3", mint, nullifier]`, so a marker that a prior `transact` already burned is silently reused and its `is_spent = true` is ignored.
+| Event | UTC | Zurich (UTC+2) | Evidence |
+| --- | --- | --- | --- |
+| GitHub repository created | July 10, 18:01:48 | July 10, 20:01:48 | [GitHub metadata captured before publication changes](PUBLICATION-EVIDENCE.json) |
+| Last push before publication preparation | July 10, 18:59:09 | July 10, 20:59:09 | Same metadata; original HEAD `2273599e93fea3ba8e138825629631d9a386322a` |
+| Superteam submission received | July 10, 19:00 | July 10, 21:00 | [Receipt](evidence/submission-received.png), [expanded email details](evidence/submission-details-redacted.png) |
+| Matching upstream fix committed | July 10, 22:22 | July 11, 00:22 | [`af9dc7f9092e43a7ee1fea89863dcf07d25901ad`](https://github.com/VeiloSolana/privacy-program/commit/af9dc7f9092e43a7ee1fea89863dcf07d25901ad) |
 
-The circuit only enforces `sum(input_values) + public_amount = sum(output_values)`; it does not force inputs to be dummy/zero when `public_amount > 0`.
-So a whitelisted relayer can feed already-spent real notes worth V into reissue with a dust `reissue_amount = P`, move only P into the vault, and mint fresh notes worth V + P out of nothing.
+All dates above are in **2026**. The screenshots show the receipt for the named Veilo bounty and July 10, 2026 at 9:00 PM. The timezone interpretation is mine: Gmail was displaying Zurich time. The screenshots do not display the submitted repository URL; my identification of this repository as the submitted PoC is accompanied by its original history and pre-publication GitHub metadata. Repository metadata is not a per-commit push attestation, and Git timestamps alone are not proof of submission.
 
-## What this PoC demonstrates
+The receipt body is unchanged. The expanded-details screenshot has only the recipient email address covered with a solid pixel redaction; image metadata was stripped. No generative image editing was used. I retain the original email privately.
 
-The same nullifier marker `[b"nullifier_v3", mint, nullifier]` is the crux.
-After a real `transact` spend burns note A and note B, their markers exist on-chain with `is_spent = true`.
-The PoC then:
+## What upstream fixed
 
-1. deposits two real notes A and B (genuine tree leaves) into an SPL pool
-2. spends A and B via `transact`, burning nullifier(A) and nullifier(B)
-3. calls `jperp_reissue_notes` with those SAME already-spent nullifiers as nonzero inputs, a slot the attacker controls, a dust `reissue_amount`, and a freshly generated valid proof, and it SUCCEEDS
-4. shows only the dust actually entered the vault while fresh notes worth value(A) + value(B) + dust were minted
-5. CONTRAST: a fresh `transact` re-spend of the same nullifier is REJECTED at account resolution (the `init` marker already exists), proving reissue specifically lacks the guard
-6. withdraws the re-minted notes via `transact` for real tokens, draining an honest depositor's liquidity from the pool
+The historical reissue handler verified a transaction proof but did not check or consume its input nullifiers. Its marker accounts used `init_if_needed`, allowing an existing spent marker to be reused. The normal `transact` path did enforce spent status.
 
-## Proving artifacts
+The fix adds `require!(!marker.is_spent, ...)` for both inputs and calls `mark_nullifier_spent` in `jperp_reissue_notes` and `jperp_recover_native`. The PoC deliberately supplies markers already marked spent, so those checks directly reject the described replay.
 
-The PoC uses Veilo's own production proving artifacts (transaction.wasm, transaction_final.zkey, transaction_verification_key.json) carried over from the tier-1 PoC.
-The tier-1 report established that this verifying key is byte-for-byte the `TRANSACTION_VK` hardcoded in the deployed program, so proofs these artifacts generate are the same proofs the on-chain verifier accepts.
-The proof and note/commitment/nullifier construction reuse the program's own `tests/test-helpers.ts`, the exact harness the Veilo test-suite uses for its passing deposits and transact spends.
+[Upstream's audit context](https://github.com/VeiloSolana/privacy-program/blob/4958a2a60f147e5bfb519f0ceeaaefc76c7a262e/AUDIT.md) lists this as a historical fund-loss bug fixed and verified live. This publication does **not** claim a current mainnet exploit. The publication review checked the source patch, not current deployed bytecode.
 
-## About the jperp_slot
+## Original submission materials
 
-A `jperp_slot` is normally created by `jperp_open_position`, which CPIs Jupiter Perpetuals and therefore needs a full mainnet fork of the Jupiter program plus the JLP pool, custodies, and oracles.
-That machinery is entirely orthogonal to this bug.
-`jperp_reissue_notes` reads only `jperp_slot.claimant_pubkey` (a `require_keys_eq` against the co-signing claimant) and `jperp_slot.bump`, and mutates `jperp_slot.reissued`; it never reads `slot.amount` and `slot.amount` is not an enforced ceiling ("No profit cap" per the program's own comment).
+- [Report](REPORT.md) — historical body preserved with a publication notice.
+- [Original README](archive/README-original.md) — original claims and reproduction instructions, retained as an archive; read the limitations below first.
+- [PoC driver](exploit.ts) and [recorded original output](EXPLOIT-RUN-OUTPUT.txt).
+- [Original submission revision](https://github.com/DanielKillenberger/veilo-fork-poc/tree/2273599e93fea3ba8e138825629631d9a386322a).
+- [AI-assisted source review](REVIEW.md) — subsequent source comparison and harness limitations, not a separately reproduced test run or third-party audit.
 
-The audit already establishes that an attacker-relayer can self-create a slot with their own claimant key via `jperp_open_position`.
-This PoC models that exact end state by seeding the slot account directly at validator genesis with a claimant we control, which isolates the demonstration to the actually vulnerable instruction instead of dragging in the unrelated and fragile Jupiter-fork machinery.
-The seeded slot is behaviorally identical to one `jperp_open_position` would create, because reissue only reads the two fields named above.
+The three original commits are preserved without rewriting. Publication documentation and receipt files are later additions. The original PoC driver, helper code, and recorded output have not been altered to improve the historical result.
 
-## How to run
+## Reproduction limits
 
-Prereqs: the program is already built at `veilo/target/deploy/privacy_pool.so` with its IDL at `veilo/target/idl/privacy_pool.json` (anchor 0.32.1 / solana 2.3.0), and node deps are installed (`npm install`).
+**This is an archival PoC, not a self-contained runnable checkout.** The transaction WASM and zkey proving artifacts are absent. The built program, IDL, and program keypair under `veilo/target/` are also absent. Installing npm dependencies alone will not make it runnable. The original report records artifact hashes, but the publication review could not verify the missing files or their provenance.
 
-```
-npm install        # once
-./run.sh
-```
+The test starts a fresh local Solana validator with a compiled historical program and a genesis-seeded claimant slot. It does not import mainnet state. It uses a local token mint and program ID; the bounty's mainnet program is `GYy4kM6GHhpgLCUscuABbzkD2ZbJ2fneYryaZ6Ch7fFU`. Slot creation through Jupiter is modeled, not executed. A whitelisted relayer, input-note secrets, a claimant-controlled slot, and sufficient pool liquidity are preconditions.
 
-`run.sh` seeds the attacker slot at genesis, boots a local `solana-test-validator` with the program and the seeded slot, and runs `exploit.ts`.
-The exploit prints one PASS line per assertion and a final `RESULT: PASS`.
+The committed run output is the author's recorded result. No fresh end-to-end reproduction was completed during publication preparation. The included verification-key JSON was compared successfully against every corresponding bundled Rust constant; that does not independently prove circuit behavior or mainnet equivalence.
 
-The validator runs on RPC port 18899 by default (override with `RPC_PORT=...`), chosen to avoid a common conflict on 8899.
+Known harness weaknesses are disclosed rather than hidden: the minted-value assertion is unconditional; the negative control accepts any exception; transaction confirmation results are not checked for `value.err`; and the final withdrawal checks a positive balance rather than the exact expected balance change. See [the review](REVIEW.md). Also, the archived `run.sh` broadly kills matching `solana-test-validator` processes; inspect it before use. The direct driver accepts `ANCHOR_PROVIDER_URL`; use only a disposable local validator.
 
-## Sample output
+## Test fixtures
 
-```
-[3] deposited note A (12.000000 USDC) leaf 0, note B (8.000000 USDC) leaf 2
-    vault balance = 20.000000 USDC
-[4] SPENT A+B via transact -> recipient got 19.899005 USDC
-  PASS  nullifier(A) marker exists and is_spent=true after transact
-  PASS  nullifier(B) marker exists and is_spent=true after transact
-    honest depositor added 30.000000 USDC; vault = 30.001000 USDC
-[5] EXPLOIT reissue tx CONFIRMED: 2Kd1FN79JxGLD5ZfxKbYB9rav6...
-  PASS  reissue with already-spent nullifiers SUCCEEDS (missing burn confirmed)
-  PASS  only dust actually entered the vault on reissue  — vault +0.001000 USDC
-  PASS  but fresh notes worth value(A)+value(B)+dust were minted  — minted 20.001000 USDC for 0.001000 USDC in
-  PASS  total_tvl bumped by only the dust, not the replayed value  — total_tvl +0.001000 USDC
-  PASS  reissue left the spent-markers untouched (never checked/burned)
-[6] transact re-spend of nullifier(A) REJECTED
-  PASS  transact REJECTS the same already-spent nullifier (init marker guard)
-[7] withdrew the re-minted note -> drain recipient got 19.899005 USDC
-  PASS  re-minted notes are REAL spendable value (withdrew them for tokens)  — drained 19.899005 USDC of other depositors' funds
+`keys/claimant.json` and `keys/mint.json` are exposed keypairs used as local test fixtures by the PoC and its genesis seeding. Treat them as public and disposable; never fund or reuse them for real assets or authority. Their presence does not establish control of any mainnet program. The repository-history scan found no additional common credential-pattern matches, but was not an exhaustive secret audit.
 
-=== RESULT: PASS (9 passed, 0 failed) ===
-```
-
-The attacker deposited 20 USDC, spent it all back out via a normal withdrawal (nullifiers burned), then replayed those same burned nullifiers through reissue to mint another 20.001 USDC of notes for 0.001 USDC of real input, and withdrew 19.9 USDC of that phantom value out of the pool, taking an honest depositor's liquidity.
-
-To rebuild the program from source:
-
-```
-cd veilo
-anchor build
-anchor idl build -o target/idl/privacy_pool.json
-```
-
-Note: the only source change from the audited tree is a single `#[allow(deref_nullptr)]` on a `#[test]` layout-assertion helper in `merkle_tree.rs`, needed because the newer rustc promotes that lint to a hard error during IDL generation.
-It is test-only and does not affect the deployed `.so` or any program logic.
-
-## Files
-
-- `exploit.ts` — the end-to-end driver (deposit, spend, reissue-replay, contrast, drain)
-- `seed-slot.ts` — writes the genesis account file for the attacker-controlled jperp_slot
-- `common.ts` — shared keys, PDA derivations, discriminator
-- `test-helpers.ts` — Veilo's own proof and note helpers (copied from the program repo)
-- `zk/` — Veilo's production proving artifacts (wasm, zkey, vkey)
-- `run.sh` — one-command runner
-- `veilo/` — the privacy_pool program source and build artifacts
+The bundled `veilo/AUDIT-REPORT-TO-VERIFY.md` also contains historical working notes on a separate prefunding issue. Its corresponding source fix is `1768b9c`, not the nullifier fix used in this timeline.

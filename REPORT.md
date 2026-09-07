@@ -1,3 +1,7 @@
+> **Historical submission report (July 10, 2026).** Published with context on September 8, 2026. The original body below is preserved; its present-tense deployment and reproduction claims describe the original report, not a new verification. See [README](README.md) for the matching fix, receipt evidence, and limitations. The original submitted revision is `2273599e93fea3ba8e138825629631d9a386322a`.
+
+> **Publication corrections:** This checkout contains historical source and author-recorded local-validator output, not a mainnet-state fork. Verification-key equality with source does not establish deployed-bytecode equivalence. The WASM/zkey, tier-1 scripts (`vkey-onchain-match.js`, `npm run poc`), and generated build outputs mentioned below are absent here. The original run has not been independently reproduced in this review. References to a private repository describe its status at submission.
+
 # Critical: Nullifier replay in jperp_reissue_notes / jperp_recover_native enables re-minting of already-spent notes (pool drain)
 
 ## Summary

@@ -1,0 +1,17 @@
+{
+  "captured_at_utc": "2026-09-07T22:11:13.687719+00:00",
+  "source": "https://api.github.com/repos/DanielKillenberger/veilo-fork-poc",
+  "repository": {
+    "id": 1296774383,
+    "node_id": "R_kgDOTUs07w",
+    "full_name": "DanielKillenberger/veilo-fork-poc",
+    "html_url": "https://github.com/DanielKillenberger/veilo-fork-poc",
+    "private": true,
+    "created_at": "2026-07-10T18:01:48Z",
+    "updated_at": "2026-07-10T19:00:13Z",
+    "pushed_at": "2026-07-10T18:59:09Z",
+    "default_branch": "master"
+  },
+  "local_head": "2273599e93fea3ba8e138825629631d9a386322a",
+  "note": "GitHub repository metadata captured before publication changes. Repository timestamps corroborate prior existence/activity; they are not a submission receipt or a per-commit push attestation."
+}
